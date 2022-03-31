@@ -2,7 +2,7 @@ import karelia
 import sys
 import time
 
-hambanner = karelia.bot("Hambanner", "test")
+hambanner = karelia.bot("Hambanner", "xkcd")
 
 hambanner.stock_responses["short_help"] = "I respond to spam."
 hambanner.stock_responses[
@@ -23,7 +23,6 @@ while True:
     try:
         while True:
             message = hambanner.parse()
-            print(message.type)
             if message.type == "send-event":
                 if message.data.sender.id not in message_lengths:
                     message_lengths[message.data.sender.id] = 0
@@ -31,7 +30,6 @@ while True:
                     message.data.sender.id
                 ] += minimum_unpenalised_length - len(message.data.content)
 
-                print(message_lengths[message.data.sender.id])
                 if message_lengths[message.data.sender.id] > warning_threshold:
                     hambanner.reply("You're sending spam. Please don't do that.")
 
