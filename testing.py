@@ -43,10 +43,6 @@ while True:
                         hambanner.reply("You're sending lots of short messages. Please consider consolidating them into fewer, longer ones.")
                         message_lengths[user_id] = warning_threshold
                         most_recent_warnings[message.data.sender.id] = time.time()
-                        with open('count.txt', 'r') as f:
-                            count = int(f.read())
-                        with open('count.txt', 'w') as f:
-                            f.write(str(count + 1))
 
             if time.time() > last_dec_time + time_step:
                 for user_id in message_lengths:

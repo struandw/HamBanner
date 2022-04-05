@@ -14,7 +14,7 @@ hambanner.connect()
 message_lengths = {}
 
 minimum_unpenalised_length = 30
-warning_threshold = 400
+warning_threshold = 300
 time_step = 15
 dec_multiplier = 0.85
 
