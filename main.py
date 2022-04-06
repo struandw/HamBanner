@@ -52,7 +52,10 @@ while True:
                 for user_id in message_lengths:
                     message_lengths[user_id] *= dec_multiplier
                 last_dec_time = time.time()
+    except SystemExit:
+        sys.exit(0)
     finally:
+        hambanner.logger.log(3, "")
         time.sleep(backoff)
         hambanner.connect()
         backoff *= 2
