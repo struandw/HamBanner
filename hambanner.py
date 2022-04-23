@@ -1,9 +1,13 @@
-import karelia
+import pprint
 import sys
 import time
-import pprint
 
-hambanner = karelia.bot("HamBanner", "xkcd")
+import karelia
+from pushover import Client
+
+ROOM = sys.argv[1]
+
+hambanner = karelia.bot("HamBanner", ROOM)
 
 hambanner.stock_responses["short_help"] = "I respond to spam."
 hambanner.stock_responses[
@@ -38,6 +42,7 @@ while True:
                 most_recent_warnings[message.data.sender.id] = 0
             if most_recent_warnings[message.data.sender.id] < time.time() - warning_cooldown:
                 hambanner.reply("You're sending lots of short messages. Please consider consolidating them into fewer, longer ones.")
+                Client().send_message(f"@{message.data.sender.name} may be spamming.", title="hatblatter", url=f"https://euphoria.leet.nu/room/{ROOM}")
                 message_lengths[user_id] = warning_threshold
                 most_recent_warnings[message.data.sender.id] = time.time()
 
